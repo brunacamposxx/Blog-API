@@ -5,6 +5,7 @@ const { STATUS_CODE_CREATED, STATUS_CODE_OK } = require('../helpers');
 const createPost = rescue(async (req, res) => {
   const { title, content, categoryIds } = req.body;
   const { id } = req.user;
+  // console.log(` id do req.user ${id}`);
   const newPost = await postService.createPost({ title, content, categoryIds, id });
   
   return res.status(STATUS_CODE_CREATED).json(newPost);
