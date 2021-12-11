@@ -25,7 +25,6 @@ const login = rescue(async (req, res) => {
 
   // console.log(findUserByEmail);
   const token = jwt.sign({ email }, JWT_SECRET, jwtConfig);
-  console.log(token);
   return res.status(STATUS_CODE_OK).json({ token });
 });
 

@@ -1,8 +1,21 @@
 const { BlogPost, User, Category } = require('../models');
+// const { ERROR_CATEGORY_NOT_FOUND } = require('../helpers');
 
-const createPost = async ({ title, content, categoryIds }) => {
-  const newBlogPost = await BlogPost.create({ title, content, categoryIds });
-  return newBlogPost;
+// const checkCategoryExists = async (categoryIds) => {
+//   const categoryExists = await User.findOne({ where: { id: categoryIds } });
+//   if (categoryExists.length === categoryIds.length) { return true; }
+//   return false;
+// };
+
+const createPost = async ({ title, content, categoryIds, userId = 1 }) => {
+  console.log(categoryIds);
+  // const categoryExists = await checkCategoryExists(categoryIds);
+  // console.log(categoryExists);
+  // if (!categoryExists) { throw ERROR_CATEGORY_NOT_FOUND; }
+
+  const post = await BlogPost.create({ title, content, userId });
+  
+  return post;
 };
 
 const getPosts = async () => {

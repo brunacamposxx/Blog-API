@@ -2,6 +2,7 @@ const BlogPost = (sequelize, DataTypes) => {
   const blogPost = sequelize.define('BlogPost', {
     title: DataTypes.STRING,
     content: DataTypes.STRING,
+    userId: DataTypes.INTEGER,
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
   }, {
@@ -10,7 +11,7 @@ const BlogPost = (sequelize, DataTypes) => {
   blogPost.associate = (models) => {
     blogPost.belongsTo(models.User, {
       foreignKey: 'userId',
-      as: 'user', // apelido da chave estrangeira FK para fazer relação no controller, como num eager loading ou lazy loading;
+      as: 'user',
     });
   };
   return blogPost;
