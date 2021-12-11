@@ -10,7 +10,10 @@ const getCategories = async () => {
   return categories;
 };
 
+const getCategoryById = async (id) => Category.findOne({ where: { id }, raw: true });
+
 module.exports = {
   createCategory,
   getCategories,
+  getCategoryById,
 };

@@ -3,11 +3,11 @@ const postService = require('../services/postService');
 const { STATUS_CODE_CREATED, STATUS_CODE_OK } = require('../helpers');
 
 const createPost = rescue(async (req, res) => {
-  const { title, content, categoryIds } = req.body;
+  const { title, content } = req.body;
   const { id } = req.user;
-  // console.log(` id do req.user ${id}`);
-  const newPost = await postService.createPost({ title, content, categoryIds, id });
-  
+  const userId = id;
+  const newPost = await postService.createPost({ title, content, userId });
+
   return res.status(STATUS_CODE_CREATED).json(newPost);
 });
 
@@ -24,6 +24,7 @@ const getPostById = rescue(async (req, res) => {
 
 const updatePost = rescue(async (req, res) => {
   const { id } = req.params;
+  // const { userId: id } = req.user;
   const { title, content } = req.body;
   const updatedPost = await postService.updatePost({ id, title, content });
   if (!content) return res.status(400).json({ message: '"content" is required' });
