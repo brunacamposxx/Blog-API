@@ -4,13 +4,18 @@ const tokenValidation = require('../middlewares/tokenValidation');
 const { 
   postValidationError, 
   categoryExistsValidation,
+  unauthUser,
+  requiredFields,
 } = require('../middlewares/blogPostsValidationError');
 
-router.post('/', tokenValidation, 
+router.put('/:id', tokenValidation, requiredFields, unauthUser, postController.updatePost);
+
+router.post('/', 
+tokenValidation, 
 postValidationError, 
-categoryExistsValidation, postController.createPost);
+categoryExistsValidation,
+postController.createPost);
 router.get('/', tokenValidation, postController.getPosts);
 router.get('/:id', tokenValidation, postController.getPostById);
-router.put('/:id', tokenValidation, postController.updatePost);
 
 module.exports = router;

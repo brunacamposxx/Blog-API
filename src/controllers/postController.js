@@ -24,11 +24,8 @@ const getPostById = rescue(async (req, res) => {
 
 const updatePost = rescue(async (req, res) => {
   const { id } = req.params;
-  // const { userId: id } = req.user;
   const { title, content } = req.body;
   const updatedPost = await postService.updatePost({ id, title, content });
-  if (!content) return res.status(400).json({ message: '"content" is required' });
-  if (!title) return res.status(400).json({ message: '"title" is required' });
   return res.status(STATUS_CODE_OK).json(updatedPost);
 });
 

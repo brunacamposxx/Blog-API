@@ -1,8 +1,8 @@
 const { BlogPost, User, Category } = require('../models');
+// const { ERROR_DIFERENT_USER } = require('../helpers');
 
 const createPost = async ({ title, content, userId }) => {
   const post = await BlogPost.create({ title, content, userId });
-  // console.log(post);
   return post;
 };
 
@@ -24,9 +24,7 @@ const getPostById = async (id) => {
   return blogPost;
 };
 
-const updatePost = async ({ id, title, content }) => {
-  // if (id !== )
-  
+const updatePost = async ({ id, title, content }) => {  
   const blogPosts = await BlogPost.update({
     title,
     content,

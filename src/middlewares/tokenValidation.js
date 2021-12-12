@@ -15,17 +15,13 @@ module.exports = async (req, res, next) => {
   if (!token) {
     return res.status(401).json({ message: 'Token not found' });
   }
-
     const decoded = jwt.verify(token, JWT_SECRET, jwtConfig);
     const user = await userService.getUserByEmail(decoded.email);
-
     if (!user) {
-      return res
-        .status(401)
+      return res.status(401)
         .json({ message: 'Expired or invalid token' });
     }
     req.user = user;
-
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });
