@@ -4,11 +4,15 @@ A API de Blogs é uma aplicação em `Node.js` usando o pacote `sequelize` para 
 
 Para fazer um post é necessário usuário e login, portanto será trabalhada a **relação entre** `user` e `post`. Também será necessário a utlização de categorias para seus posts, assim trabalhando a relação de `posts` para `categorias` e de `categorias` para `posts`.
 
+Os códigos de status de respostas HTTP estão com base nos princípios REST.
+
+
 ---
 
 Desenvolvido por 💬:
 Bruna Campos @brunacamposxx
 Por favor, me envie seu feedback sobre esse projeto e me ajude a evoluir 🧠
+
 ---
 
 # Habilidades 
@@ -33,16 +37,18 @@ Primeiro, há uma tabela para os usuários que desejam se cadastrar na aplicaç�
 ### ANTES DE COMEÇAR A DESENVOLVER:
 
 1. Clone o repositório
-  * `git clone https://github.com/brunacamposxx/Blogs-API`.
+  * `git clone git@github.com:brunacamposxx/Blogs-API.git`.
   * Entre na pasta do repositório que você acabou de clonar:
     * `cd Blogs-API`
 
 2. Instale as dependências
   * `npm install`
 
-3. Startar node com Nodemon
-  * `npm run debug`
+3. Para instalar o nodemon como dev dependency
+ * `npm install --save-dev nodemon`
 
+4. Startar node com Nodemon
+  * `npm run debug`
 
 ---
 # Testando as requisições:
@@ -50,40 +56,6 @@ Primeiro, há uma tabela para os usuários que desejam se cadastrar na aplicaç�
 ### 👀 Observações importantes:
 
 **Você irá precisar configurar as variáveis globais do MySQL.** Você pode usar esse [Conteúdo de variáveis de ambiente com NodeJS](https://blog.rocketseat.com.br/variaveis-ambiente-nodejs/) como referência.
-
-**Faça essas configurações também para as variáveis de ambiente usadas nesses arquivo:**
-
-`sd-011-project-blogs-api/config/config.js`
-
-```
-module.exports = {
-  development: {
-    username: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: 'blogs_api',
-    host: process.env.HOSTNAME,
-    dialect: 'mysql',
-  },
-  test: {
-    username: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: 'blogs_api',
-    host: process.env.HOSTNAME,
-    dialect: 'mysql',
-  },
-  production: {
-    username: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    database: 'blogs_api',
-    host: process.env.HOSTNAME,
-    dialect: 'mysql',
-  },
-};
-```
-
-**(Neste arquivo e obrigatório deixar o nome do database como `"database": 'blogs_api'`)**
-
-**É essencial usar essas 3 variávies no arquivo acima:**
 
 #### Variáveis:
 
@@ -93,10 +65,6 @@ module.exports = {
 
 `password: process.env.MYSQL_PASSWORD`
 
-
-#### Status HTTP
-
----
 
 #### Os seguintes pontos serão avaliados:
 
@@ -142,13 +110,11 @@ module.exports = {
   }
   ```
   
-  **Os dados acima são fictícios, e estão aqui apenas como exemplo**  
 
 
-## Lista de Requisitos:
-Utilize o Postman para testar a aplicação.
+# ⚠️ Utilize o Postman para testar a aplicação. ⚠️
 
-### 1 - Cadastro de usuários:
+###  Cadastro de usuários:
 - POST `/user` - rota que cria um novo usário a tabela no banco de dados;
 
 - O corpo da requisição deve conter o seguinte formato:
@@ -182,7 +148,6 @@ Utilize o Postman para testar a aplicação.
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
   }
   ```
-  _O token anterior é fictício_
 
 
 
@@ -207,10 +172,9 @@ Utilize o Postman para testar a aplicação.
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImlkIjo1LCJkaXNwbGF5TmFtZSI6InVzdWFyaW8gZGUgdGVzdGUiLCJlbWFpbCI6InRlc3RlQGVtYWlsLmNvbSIsImltYWdlIjoibnVsbCJ9LCJpYXQiOjE2MjAyNDQxODcsImV4cCI6MTYyMDY3NjE4N30.Roc4byj6mYakYqd9LTCozU1hd9k_Vw5IWKGL4hcCVG8"
   }
   ```
-  _O token anterior é fictício_
 
 
-### 3 - Lista de usuários para
+### Lista de usuários para
 - GET `/user`
 
 - Listar todos os **Users** e retorna na seguinte estrutura:
@@ -229,7 +193,7 @@ Utilize o Postman para testar a aplicação.
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
 
-### 4 - Recuperando um usuário específico 
+### Recuperando um usuário específico 
 - GET `/user/:id`
 
 - Retorna os detalhes do usuário baseado no `id` da rota. Os dados tem o seguinte formato:
@@ -245,7 +209,8 @@ Utilize o Postman para testar a aplicação.
 
 - A requisição deve ter token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
-### 5 - Cadastro de Categorias aplicação
+
+### Cadastro de Categorias aplicação
 - POST `/categories`
 
 - Esse endpoint deve receber uma _Categoria_ no corpo da requisição e à criárá no banco. O corpo da requisição deve ter a seguinte estrutura:
@@ -261,7 +226,7 @@ Utilize o Postman para testar a aplicação.
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
 
-### 6 - Listagem de categorias
+###  Listagem de categorias
 - GET `/categories`
 
 - Esse endpoint lista todas as Categorias e retorna na seguinte estrutura:
@@ -280,7 +245,7 @@ Utilize o Postman para testar a aplicação.
 ```
 
 
-### 7 - Criação de Posts
+###  Criação de Posts
 - POST `/post`
 
 - Esse endpoint deve receber um _BlogPost_ no corpo da requisição e à criará no banco. O corpo da requisição deve ter a seguinte estrutura:
@@ -298,7 +263,7 @@ Utilize o Postman para testar a aplicação.
 - A requisição deve ter o token de autenticação nos headers e, caso contrário, retorne um código de `status 401`.
 
 
-### 8 - Listagem de Posts 
+### Listagem de Posts 
 - GET `/post`
 
 - Esse endpoint lista todos os _BlogPosts_ e retorna na seguinte estrutura:
@@ -328,7 +293,7 @@ Utilize o Postman para testar a aplicação.
 ]
 ```
 
-### 9 - Retorno de um Post específico
+### Retorno de um Post específico
 - GET `post/:id`
 
 - Retorna um **BlogPost** com o `id` especificado. O retorno será no seguinte formato:
@@ -357,7 +322,7 @@ Utilize o Postman para testar a aplicação.
 ```
 
 
-### 10 - Atualização de um Post específico 
+### Atualização de um Post específico 
 - PUT `/post/:id`
 
 
@@ -382,7 +347,7 @@ Utilize o Postman para testar a aplicação.
 
 
 
-### 11 - Deletando um post específico 
+### Deletando um post específico 
 - DELETE `post/:id`
 
 - Deleta o post com o `id` especificado. Só é permitido para o usuário que criou o **BlogPost**.
@@ -400,7 +365,7 @@ Utilize o Postman para testar a aplicação.
 - Utilizando o token de autenticação nos headers, o usuário correspondente deve ser apagado.
 
 
-### 13 - Pesquisando no queryParam
+### Pesquisando no queryParam
 - GET `post/search?q=:searchTerm`
 
 #### Os seguintes pontos serão avaliados:
@@ -435,3 +400,4 @@ Utilize o Postman para testar a aplicação.
 - Caso nenhum **BlogPost** satisfaça a busca, retorna um array vazio.
 
 ---
+
