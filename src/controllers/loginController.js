@@ -11,19 +11,15 @@ const jwtConfig = {
 
 const login = rescue(async (req, res) => {
   const { email, password } = req.body;
-  // console.log(email);
 
   const findUserByEmail = await userService.getUserByEmail(email);
-  console.log(findUserByEmail);
 
-  // console.log(findUserByEmail);
   if (!findUserByEmail || findUserByEmail.password !== password) {
     return res.status(STATUS_CODE_BAD_REQUEST).json({
       message: 'Invalid fields',
     });
   }
 
-  // console.log(findUserByEmail);
   const token = jwt.sign({ email }, JWT_SECRET, jwtConfig);
   return res.status(STATUS_CODE_OK).json({ token });
 });

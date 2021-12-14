@@ -25,7 +25,11 @@ const getPostById = rescue(async (req, res) => {
 const updatePost = rescue(async (req, res) => {
   const { id } = req.params;
   const { title, content } = req.body;
+  const { id: userId } = req.user;
   const updatedPost = await postService.updatePost({ id, title, content });
+  if (userId !== updatedPost.userId) { 
+    return res.status(401).json({ message: 'Unauthorized user' });
+  }
   return res.status(STATUS_CODE_OK).json(updatedPost);
 });
 

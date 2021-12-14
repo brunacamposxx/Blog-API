@@ -4,11 +4,10 @@ const tokenValidation = require('../middlewares/tokenValidation');
 const { 
   postValidationError, 
   categoryExistsValidation,
-  unauthUser,
   requiredFields,
 } = require('../middlewares/blogPostsValidationError');
 
-router.put('/:id', tokenValidation, requiredFields, unauthUser, postController.updatePost);
+router.put('/:id', tokenValidation, requiredFields, postController.updatePost);
 
 router.post('/', 
 tokenValidation, 

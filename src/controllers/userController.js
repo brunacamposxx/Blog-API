@@ -23,20 +23,10 @@ const createUser = rescue(async (req, res) => {
   }
   
   const token = jwt.sign({ email }, JWT_SECRET, jwtConfig);
-  // console.log(token);
 
   await userService.createUser({ displayName, email, password, image });
-  // console.log(user);
   return res.status(STATUS_CODE_CREATED).json({ token });
 });
-
-// const getUserByEmail = rescue(async (req, res) => {
-//   const { email } = req.body;
-//   const userFound = await userService.getUserByEmail(email);
-//   console.log(userFound);
-  
-//   return res.status(STATUS_CODE_OK).json({ userFound });
-// });
 
 const getById = rescue(async (req, res) => {
   const user = await userService.getById(req.params.id);
@@ -47,9 +37,6 @@ const getById = rescue(async (req, res) => {
 });
 
 const getAllUsers = rescue(async (req, res) => {
-  // const { dataValues } = req.user;
-  // console.log(dataValues);
-  
   const allUsers = await userService.getAllUsers();
     res.status(STATUS_CODE_OK).json(allUsers);
 });

@@ -24,13 +24,14 @@ const getPostById = async (id) => {
   return blogPost;
 };
 
-const updatePost = async ({ id, title, content }) => {  
-  const blogPosts = await BlogPost.update({
-    title,
-    content,
-  },
-  { where: { id } });
-  return blogPosts;
+const updatePost = async ({ id, title, content }) => {
+  const findById = await BlogPost.findOne({
+    where: { id },
+    include: [
+      { model: Category, as: 'categories' },
+    ],
+  });
+  return findById.update({ title, content });
 };
 
 module.exports = {

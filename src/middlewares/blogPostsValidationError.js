@@ -34,31 +34,22 @@ const categoryExistsValidation = async (req, res, next) => {
   next();
 };
 
-const unauthUser = async (req, res, next) => {
-  const { id } = req.params;
-  const { id: userId } = req.user;
-
-  if (id !== userId) {
-    return res.status(401).json({ message: 'Unauthorized user' });
-  }
-  next();
-};
-
 const requiredFields = async (req, res, next) => {
-  const { content, title } = req.body;
+  const { content, title, categoryIds } = req.body;
   if (!content) {
     return res.status(400).json({ message: '"content" is required' });
   }
   if (!title) {
     return res.status(400).json({ message: '"title" is required' });
   }
-  console.log('cheguei aqui no middleware do content e title');
+  if (categoryIds) {
+    return res.status(400).json({ message: 'Categories cannot be edited' });
+  }
   next();
 };
 
 module.exports = {
   postValidationError,
   categoryExistsValidation,
-  unauthUser,
   requiredFields,
 };

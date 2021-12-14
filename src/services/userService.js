@@ -7,7 +7,6 @@ const createUser = async ({ displayName, email, password, image }) => {
 
 const getUserByEmail = async (email) => {
   const findUser = await User.findOne({ where: { email } });
-  // console.log(findUser);
   return findUser;
 };
 
@@ -15,17 +14,8 @@ const getAllUsers = async () => {
   const allUsers = await User.findAll({
     attributes: { exclude: ['password'] },
   });
-  // const { password, ...allUsersWithoutPwd } = allUsers;
-  // console.log(allUsersWithoutPwd);
-  // const { id, displayName, email, image } = allUsers;
-  // console.log(` ${allUsers} aqui`);
+
   return allUsers;
-  // return {
-    // id,
-    // displayName,
-    // email,
-    // image,
-  // };
 };
 
 const getById = async (id) => {
