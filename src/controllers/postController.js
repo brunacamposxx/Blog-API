@@ -33,9 +33,24 @@ const updatePost = rescue(async (req, res) => {
   return res.status(STATUS_CODE_OK).json(updatedPost);
 });
 
+const excludePost = rescue(async (req, res) => {
+  const { id } = req.params;
+  const { id: userId } = req.user;
+  
+  const excludedPost = await postService.excludePost({ id });
+
+  if (!excludedPost) return res.status(404).json({ message: 'Post does not exist' });
+  if (userId !== excludedPost.userId) { 
+    return res.status(401).json({ message: 'Unauthorized user' });
+  }
+  
+  return res.status(204).json(excludedPost);
+});
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
   updatePost,
+  excludePost,
 };

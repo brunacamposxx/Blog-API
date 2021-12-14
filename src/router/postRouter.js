@@ -7,8 +7,6 @@ const {
   requiredFields,
 } = require('../middlewares/blogPostsValidationError');
 
-router.put('/:id', tokenValidation, requiredFields, postController.updatePost);
-
 router.post('/', 
 tokenValidation, 
 postValidationError, 
@@ -16,5 +14,7 @@ categoryExistsValidation,
 postController.createPost);
 router.get('/', tokenValidation, postController.getPosts);
 router.get('/:id', tokenValidation, postController.getPostById);
+router.put('/:id', tokenValidation, requiredFields, postController.updatePost);
+router.delete('/:id', tokenValidation, postController.excludePost);
 
 module.exports = router;

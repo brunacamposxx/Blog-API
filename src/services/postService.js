@@ -1,5 +1,5 @@
 const { BlogPost, User, Category } = require('../models');
-// const { ERROR_DIFERENT_USER } = require('../helpers');
+// const { postInexistente } = require('../helpers');
 
 const createPost = async ({ title, content, userId }) => {
   const post = await BlogPost.create({ title, content, userId });
@@ -34,9 +34,19 @@ const updatePost = async ({ id, title, content }) => {
   return findById.update({ title, content });
 };
 
+const excludePost = async ({ id }) => {
+  const findById = await BlogPost.findOne({
+    where: { id },
+  });
+  if (!findById) return null;
+
+  return findById.destroy();
+};
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
   updatePost,
+  excludePost,
 };
