@@ -47,10 +47,19 @@ const excludePost = rescue(async (req, res) => {
   return res.status(204).json(excludedPost);
 });
 
+const getByQuery = rescue(async (req, res) => {
+  const { q } = req.query;
+
+  const post = await postService.getByQuery({ q });
+
+  return res.status(200).json(post);
+});
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
   updatePost,
   excludePost,
+  getByQuery,
 };

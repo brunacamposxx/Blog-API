@@ -1,5 +1,5 @@
+// const { Op } = require('sequelize');
 const { BlogPost, User, Category } = require('../models');
-// const { postInexistente } = require('../helpers');
 
 const createPost = async ({ title, content, userId }) => {
   const post = await BlogPost.create({ title, content, userId });
@@ -43,10 +43,23 @@ const excludePost = async ({ id }) => {
   return findById.destroy();
 };
 
+const getByQuery = async ({ q }) => {
+  const blogPosts = await getPosts();
+
+  if (!q) return blogPosts;
+
+  const search = blogPosts.filter(
+    (post) => post.title.includes(q) || post.content.includes(q),
+  );
+
+  return search;
+};
+
 module.exports = {
   createPost,
   getPosts,
   getPostById,
   updatePost,
   excludePost,
+  getByQuery,
 };

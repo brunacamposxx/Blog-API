@@ -7,6 +7,8 @@ const {
   requiredFields,
 } = require('../middlewares/blogPostsValidationError');
 
+router.get('/search', tokenValidation, postController.getByQuery);
+
 router.post('/', 
 tokenValidation, 
 postValidationError, 
