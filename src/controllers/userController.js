@@ -33,17 +33,24 @@ const getById = rescue(async (req, res) => {
   if (!user) {
     return res.status(404).json({ message: 'User does not exist' });
   }
-    res.status(STATUS_CODE_OK).json(user);
+    return res.status(STATUS_CODE_OK).json(user);
 });
 
 const getAllUsers = rescue(async (req, res) => {
   const allUsers = await userService.getAllUsers();
-    res.status(STATUS_CODE_OK).json(allUsers);
+    return res.status(STATUS_CODE_OK).json(allUsers);
+});
+
+const excludeUser = rescue(async (req, res) => {
+  const { id } = req.user;
+
+  const user = await userService.excludeUser(id);
+  return res.status(204).json(user);
 });
 
 module.exports = {
   createUser,
-  // getUserByEmail,
   getById,
   getAllUsers,
+  excludeUser,
 };
