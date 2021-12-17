@@ -1,8 +1,10 @@
 const express = require('express');
-const userRouter = require('./src/router/userRouter');
-const loginRouter = require('./src/router/loginRouter');
-const categoriesRouter = require('./src/router/categoriesRouter');
-const postRouter = require('./src/router/postRouter');
+const userRouter = require('./src/api/router/userRouter');
+const loginRouter = require('./src/api/router/loginRouter');
+const categoriesRouter = require('./src/api/router/categoriesRouter');
+const postRouter = require('./src/api/router/postRouter');
+
+require('dotenv').config();
 
 const app = express();
 app.use(express.json());

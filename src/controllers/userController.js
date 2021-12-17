@@ -1,30 +1,17 @@
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 const rescue = require('express-rescue');
 const userService = require('../services/userService');
 const {
   STATUS_CODE_OK,
   STATUS_CODE_CREATED,
 } = require('../helpers/index.js');
-
-const JWT_SECRET = 'hardcoded-secret';
-const jwtConfig = {
-expiresIn: '7d',
-algorithm: 'HS256',
-};
+const generateToken = require('../api/auth/auth.js');
 
 const createUser = rescue(async (req, res) => {
   const { displayName, email, password, image } = req.body;
-  
-  const duplicateEmail = await userService.getUserByEmail(email);
-  if (duplicateEmail) {
-    return res.status(409).json({
-      message: 'User already registered',
-    });
-  }
-  
-  const token = jwt.sign({ email }, JWT_SECRET, jwtConfig);
-
   await userService.createUser({ displayName, email, password, image });
+  
+  const token = generateToken(email);
   return res.status(STATUS_CODE_CREATED).json({ token });
 });
 

@@ -1,4 +1,5 @@
 const Joi = require('joi');
+const userService = require('../services/userService');
 
 const schema = Joi.object({
   displayName: Joi.string().min(8).not().empty()
@@ -20,4 +21,13 @@ const userValidationError = (req, res, next) => {
   return next();
 };
 
-module.exports = userValidationError;
+const userAlreadyRegistered = async (req, res, next) => {
+  const { email } = req.body;
+  const duplicateEmail = await userService.getUserByEmail(email);
+  if (duplicateEmail) return res.status(409).json({ message: 'User already registered' });
+  return next();
+};
+
+module.exports = { userValidationError, 
+  userAlreadyRegistered
+};
