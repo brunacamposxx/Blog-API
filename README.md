@@ -44,10 +44,7 @@ Primeiro, há uma tabela para os usuários que desejam se cadastrar na aplicaç�
 2. Instale as dependências
   * `npm install`
 
-3. Para instalar o nodemon como dev dependency
- * `npm install --save-dev nodemon`
-
-4. Startar node com Nodemon
+3. Startar node com Nodemon
   * `npm run debug`
 
 ---

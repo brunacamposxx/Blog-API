@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
-// const { User } = require('../../models');
-const userService = require('../services/userService');
+const userService = require('../../services/userService');
 
-const JWT_SECRET = 'hardcoded-secret';
+
+const { JWT_SECRET } = process.env;
 
 const jwtConfig = {
   expiresIn: '7d',
@@ -12,9 +12,9 @@ const jwtConfig = {
 module.exports = async (req, res, next) => {
   const token = req.headers.authorization;
   try {
-  if (!token) {
-    return res.status(401).json({ message: 'Token not found' });
-  }
+    if (!token) {
+      return res.status(401).json({ message: 'Token not found' });
+    }
     const decoded = jwt.verify(token, JWT_SECRET, jwtConfig);
     const user = await userService.getUserByEmail(decoded.email);
     if (!user) {
