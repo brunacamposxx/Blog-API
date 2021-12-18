@@ -10,7 +10,8 @@ const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`ouvindo porta ${PORT}!`));
+
+app.listen(PORT, () => console.log(`listening PORT ${PORT}`));
 
 app.use('/user', userRouter);
 app.use('/login', loginRouter);
@@ -18,5 +19,3 @@ app.use('/categories', categoriesRouter);
 app.use('/post', postRouter);
 
 module.exports = app;
-
-// testando branch test

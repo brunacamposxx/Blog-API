@@ -52,15 +52,15 @@ Primeiro, há uma tabela para os usuários que desejam se cadastrar na aplicaç�
 
 ### 👀 Observações importantes:
 
-**Você irá precisar configurar as variáveis globais do MySQL.** Você pode usar esse [Conteúdo de variáveis de ambiente com NodeJS](https://blog.rocketseat.com.br/variaveis-ambiente-nodejs/) como referência.
+**Você irá precisar configurar as variáveis globais do MySQL.** 
 
 #### Variáveis:
 
-`host: process.env.HOSTNAME`
-
-`user: process.env.MYSQL_USER`
-
-`password: process.env.MYSQL_PASSWORD`
+`JWT_SECRET=sua-senha
+MYSQL_USER=seu-user-MYSQL
+MYSQL_PASSWORD=sua-senha-MYSQL
+HOST=localhost
+PORT=3000`
 
 
 #### Os seguintes pontos serão avaliados:
