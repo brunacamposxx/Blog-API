@@ -17,3 +17,6 @@ app.use('/user', userRouter);
 app.use('/login', loginRouter);
 app.use('/categories', categoriesRouter);
 app.use('/post', postRouter);
+
+
+// testando git branch main;
