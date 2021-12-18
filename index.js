@@ -9,11 +9,12 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
-const PORT = 3000;
-
+const PORT = process.env.PORT;
 app.listen(PORT, () => console.log(`ouvindo porta ${PORT}!`));
 
 app.use('/user', userRouter);
 app.use('/login', loginRouter);
 app.use('/categories', categoriesRouter);
 app.use('/post', postRouter);
+
+module.exports = app;
