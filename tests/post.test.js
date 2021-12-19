@@ -9,13 +9,13 @@ chai.use(chaiHttp);
 
 const EXAMPLE_ID = '1';
 
-describe('GET /user/:id', async () => {
+describe('GET /post/:id', async () => {
 
     describe('quando não é passado um JWT para autenticação', () => {
         let response = {};
 
         before(async () => {
-          response = await chai.request(server).get(`/user/${EXAMPLE_ID}`);
+          response = await chai.request(server).get(`/post/${EXAMPLE_ID}`);
         });
 
         it('retorna código de status "401"', async () => {          
@@ -47,7 +47,7 @@ describe('GET /user/:id', async () => {
           .then((res) => res.body.token);
 
           response = await chai.request(server)
-            .get(`/user/${EXAMPLE_ID}`)
+            .get(`/post/${EXAMPLE_ID}`)
             .set('Authorization', token);
       });
 
