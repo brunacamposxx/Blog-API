@@ -6,6 +6,7 @@
 .pnp.js
 /.nyc_output
 .nyc_output
+/processinfo
 
 # testing
 /coverage
