@@ -18,5 +18,4 @@ app.use('/login', loginRouter);
 app.use('/categories', categoriesRouter);
 app.use('/post', postRouter);
 
-
-// testando git branch main;
+module.exports = app;
